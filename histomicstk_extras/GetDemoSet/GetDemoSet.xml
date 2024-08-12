@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executable>
+  <category>HistomicsTK</category>
+  <title>Get Demo Set</title>
+  <description>Add a demo set to Girder</description>
+  <version>1.0.0</version>
+  <documentation-url>https://digitalslidearchive.github.io/HistomicsTK</documentation-url>
+  <license>Apache 2.0</license>
+  <contributor>David Manthey (Kitware Inc)</contributor>
+  <acknowledgements></acknowledgements>
+  <parameters>
+    <label>Inputs</label>
+    <description>Input parameters</description>
+    <string>
+      <name>demo</name>
+      <label>Demo Set URL</label>
+      <description>URL of a zip file containing a demo set</description>
+      <channel>input</channel>
+      <index>0</index>
+    </string>
+    <directory reference="_girder_id_">
+      <name>path</name>
+      <longflag>path</longflag>
+      <label>Destination</label>
+      <description>Destination folder.  Unspecified for default</description>
+      <channel>input</channel>
+    </directory>
+  </parameters>
+
+  <parameters advanced="true">
+    <label>Girder API URL and Key</label>
+    <description>A Girder API URL and token for Girder client</description>
+    <string>
+      <name>girderApiUrl</name>
+      <longflag>api-url</longflag>
+      <label>Girder API URL</label>
+      <description>A Girder API URL (e.g., https://girder.example.com:443/api/v1)</description>
+      <default></default>
+    </string>
+    <string>
+      <name>girderToken</name>
+      <longflag>girder-token</longflag>
+      <label>Girder Token</label>
+      <description>A Girder token</description>
+      <default></default>
+    </string>
+  </parameters>
+</executable>

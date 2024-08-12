@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executable>
+  <category>HistomicsTK</category>
+  <title>Create Demo Set</title>
+  <description>Create a demo set from a folder in Girder, including all files, metadata, and annotations</description>
+  <version>1.0.0</version>
+  <documentation-url>https://digitalslidearchive.github.io/HistomicsTK</documentation-url>
+  <license>Apache 2.0</license>
+  <contributor>David Manthey (Kitware Inc)</contributor>
+  <acknowledgements></acknowledgements>
+  <parameters>
+    <label>Inputs</label>
+    <description>Input parameters</description>
+    <directory defaultNameMatch="DataSet" reference="_girder_id_">
+      <name>create</name>
+      <longflag>create</longflag>
+      <label>Source</label>
+      <description>Source folder</description>
+      <channel>input</channel>
+    </directory>
+  </parameters>
+  <parameters>
+    <label>Outputs</label>
+    <description>Output parameters</description>
+    <string>
+      <name>path</name>
+      <longflag>path</longflag>
+      <label>Resource Path</label>
+      <description>Preferred resource destination when adding the demo set to another system</description>
+      <channel>input</channel>
+      <default></default>
+    </string>
+    <image fileExtensions=".zip">
+      <name>demo</name>
+      <label>Output Demo Zip File</label>
+      <description>A zip file containing the complete demo set resources</description>
+      <channel>output</channel>
+      <index>0</index>
+    </image>
+  </parameters>
+
+  <parameters advanced="true">
+    <label>Girder API URL and Key</label>
+    <description>A Girder API URL and token for Girder client</description>
+    <string>
+      <name>girderApiUrl</name>
+      <longflag>api-url</longflag>
+      <label>Girder API URL</label>
+      <description>A Girder API URL (e.g., https://girder.example.com:443/api/v1)</description>
+      <default></default>
+    </string>
+    <string>
+      <name>girderToken</name>
+      <longflag>girder-token</longflag>
+      <label>Girder Token</label>
+      <description>A Girder token</description>
+      <default></default>
+    </string>
+  </parameters>
+</executable>
