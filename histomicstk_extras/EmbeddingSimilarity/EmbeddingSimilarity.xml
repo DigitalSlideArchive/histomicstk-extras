@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executable>
+  <category>HistomicsTK</category>
+  <title>Embedding Similarity</title>
+  <description>Calculate similarity within an image based on a feature embedding from different AI models</description>
+  <version>1.0.0</version>
+  <documentation-url>https://digitalslidearchive.github.io/HistomicsTK</documentation-url>
+  <license>Apache 2.0</license>
+  <contributor>David Manthey (Kitware Inc)</contributor>
+  <parameters>
+    <label>Inputs</label>
+    <description>Input parameters</description>
+    <image>
+      <name>image</name>
+      <label>Input Image</label>
+      <description>Input image</description>
+      <channel>input</channel>
+      <index>0</index>
+    </image>
+    <image reference="_girder_id_">
+      <name>imageid</name>
+      <longflag>imageid</longflag>
+      <label>Input Image ID</label>
+      <description>Input image ID</description>
+      <channel>input</channel>
+    </image>
+    <file fileExtensions=".npz">
+      <name>embedin</name>
+      <label>Embedding Input File</label>
+      <description>File with embeddings for image patches</description>
+      <channel>input</channel>
+      <longflag>embedin</longflag>
+    </file>
+
+    <string>
+      <name>annotationID</name>
+      <longflag>annotation</longflag>
+      <label>Annotation ID</label>
+      <description>If specified, this annotation will be modified.  If unspecified, a new annotation will be created</description>
+      <default></default>
+    </string>
+    <region shapes="point,submitoff">
+      <name>keypoint</name>
+      <label>Key Point</label>
+      <longflag>keypoint</longflag>
+      <description>Key point for the similarity.</description>
+      <default>-1,-1</default>
+    </region>
+    <integer>
+      <name>aggregate</name>
+      <longflag>aggregate</longflag>
+      <description>Number of patches to aggregate before comparison</description>
+      <label>Aggregation</label>
+      <default>5</default>
+    </integer>
+    <double>
+      <name>threshold</name>
+      <longflag>threshold</longflag>
+      <description>Minimum cosine similarity to appear on the heatmap [-1, 1]</description>
+      <label>Plot Threshold</label>
+      <default>0.75</default>
+    </double>
+    <string>
+      <name>color</name>
+      <longflag>color</longflag>
+      <label>Color</label>
+      <description>Primary color for heatmap</description>
+      <default>#FFFF00</default>
+    </string>
+  </parameters>
+  <parameters>
+    <label>Generation</label>
+    <description>Calculate embeddings based on a model</description>
+    <string-enumeration>
+      <name>model</name>
+      <longflag>model</longflag>
+      <description>Model to use if calculating embeddings</description>
+      <label>Model</label>
+      <default>Gigapath</default>
+      <element>Gigapath</element>
+      <element>DinoV2Large</element>
+      <element>Midnight</element>
+    </string-enumeration>
+    <integer>
+      <name>tilesize</name>
+      <longflag>tilesize</longflag>
+      <description>Size of image patch to use for comparison</description>
+      <label>Tile Size</label>
+      <default>224</default>
+    </integer>
+    <integer>
+      <name>stride</name>
+      <longflag>stride</longflag>
+      <description>Spacing between patch centers</description>
+      <label>Analysis Stride</label>
+      <default>112</default>
+    </integer>
+    <double>
+      <name>magnification</name>
+      <longflag>magnification</longflag>
+      <description>Magnification for tile sizes to send to the model.  0 for the default for model.</description>
+      <label>Magnification</label>
+      <default>0</default>
+    </double>
+    <integer>
+      <name>batch</name>
+      <longflag>batch</longflag>
+      <description>Batch size for sending data to torch</description>
+      <label>Batch Size</label>
+      <default>16</default>
+    </integer>
+    <file fileExtensions=".npz">
+      <name>embedout</name>
+      <label>Embedding Output File</label>
+      <description>File to store embeddings for image patches</description>
+      <channel>output</channel>
+      <longflag>embedout</longflag>
+    </file>
+
+  </parameters>
+
+  <parameters advanced="true">
+    <label>Girder API URL and Key</label>
+    <description>A Girder API URL and token for Girder client</description>
+    <string>
+      <name>girderApiUrl</name>
+      <longflag>api-url</longflag>
+      <label>Girder API URL</label>
+      <description>A Girder API URL (e.g., https://girder.example.com:443/api/v1)</description>
+      <default></default>
+    </string>
+    <string>
+      <name>girderToken</name>
+      <longflag>girder-token</longflag>
+      <label>Girder Token</label>
+      <description>A Girder token</description>
+      <default></default>
+    </string>
+  </parameters>
+</executable>

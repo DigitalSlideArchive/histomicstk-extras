@@ -9,6 +9,10 @@ RUN apt-get update && \
     && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
+RUN python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+
+RUN python -m pip install timm
+
 RUN python -m pip install histomicstk --find-links https://girder.github.io/large_image_wheels
 
 # Install the latest version of large_image.  This can be disabled if the

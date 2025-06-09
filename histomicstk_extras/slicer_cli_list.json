@@ -10,5 +10,8 @@
   },
   "BOWSimilarity": {
     "type": "python"
+  },
+  "EmbeddingSimilarity": {
+    "type": "python"
   }
 }
