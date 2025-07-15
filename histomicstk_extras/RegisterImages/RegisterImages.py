@@ -145,11 +145,13 @@ def debug_image(debug, img, tag):
         img = img.astype(np.uint8)
     basetag = tag
     basenum = 1
-    while tag in debug.channelNames:
+    while tag in (debug.channelNames or []):
         basenum += 1
         tag = f'{basetag}{basenum}'
-    debug.addTile(img, c=len(debug.channelNames))
-    debug.channelNames.append(tag)
+    debug.addTile(img, c=len(debug.channelNames or []))
+    channelNames = (debug.channelNames or [])
+    channelNames.append(tag)
+    debug.channelNames = channelNames
 
 
 def output_image(tmpdir, name, multi, outpath):
